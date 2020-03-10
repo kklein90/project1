@@ -1,0 +1,38 @@
+{
+    "provisioners": [
+        {
+            "type": "chef-solo",
+            "chef_license": "accept-silent",
+            "config_template": "/root/chef/solo.rb",
+            "json": "/root/chef/node.json",
+            "cookbook_paths": ["/root/chef/cookbooks"],
+            "data_bags_path": ["/root/chef/data_bags"],
+        },
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/base.sh",
+                "scripts/network_tuning.sh",
+                "scripts/aws-cloud-init.sh",
+                "scripts/cleanup.sh"
+            ],
+        "only": ["test-01-ami"]
+        }
+    ],
+    "variables": {},
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "name": "test-01-ami",
+            "communicator": "ssh",
+            "region": "us-east-1",
+            "source_ami": "{{ user `source_ami` }}",
+            "iam_instance_profile": "{{ user `iam_profile` }}",
+            "instance_type": "{{ user `instance_type` }}",
+            "ssh_username": "ec2-user",
+            "ami_name": "ec2-nginx-test-{{timestamp}}",
+            "vpc_id": "{{ user `vpc_id` }}",
+            "subnet_id": "{{ user `subnet_id` }}"
+        }
+    ]
+}
