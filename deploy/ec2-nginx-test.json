@@ -6,7 +6,7 @@
             "config_template": "/root/chef/solo.rb",
             "json": "/root/chef/node.json",
             "cookbook_paths": ["/root/chef/cookbooks"],
-            "data_bags_path": ["/root/chef/data_bags"],
+            "data_bags_path": ["/root/chef/data_bags"]
         },
         {
             "type": "shell",
