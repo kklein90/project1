@@ -1,5 +1,5 @@
 pipeline {
-  agent docker-slave
+  agent { label 'docker-slave' }
   
   stages {
     stage('checkout-scm') {
