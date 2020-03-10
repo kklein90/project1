@@ -10,7 +10,7 @@ pipeline {
     
     stage('build-image') {
         steps {
-            sh 'cd deploy && packer build ec2-nginx-test.json'
+            sh 'cd deploy && /usr/local/bin/packer build ec2-nginx-test.json'
         }
     }
   }
